@@ -1,9 +1,9 @@
+import useRouteCustom from './routes/useRouteCustom';
+import AOSProvider from './utils/AOSProvider.jsx';
+
 function App() {
-  return (
-    <>
-      <h1>Hello</h1>
-    </>
-  );
+  const myRoutes = useRouteCustom();
+  return <AOSProvider>{myRoutes}</AOSProvider>;
 }
 
 export default App;
