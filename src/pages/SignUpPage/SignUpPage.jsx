@@ -16,7 +16,7 @@ const SignUpPage = () => {
     dispatch(handleTurnOnLoading());
     setTimeout(() => {
       dispatch(handleTurnOffLoading());
-    }, 6550);
+    }, 3525);
   }, []);
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">

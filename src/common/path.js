@@ -1,7 +1,10 @@
 export const path = {
-  homepage: '/',
+  home: '/',
   signup: '/signup',
   login: '/login',
   profile: '/profile',
+  lockScreen: '/lock-screen',
+  logout: '/logout',
+  taskManager: '/task-manager',
   test: '/test',
 };

@@ -3,10 +3,31 @@ import { path } from '../common/path';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import SignUpPage from '../pages/SignUpPage/SignUpPage';
 import HomeTemplate from '../templates/HomeTemplate/HomeTemplate';
+import TaskManager from '../pages/TaskManager/TaskManager';
+import ProfilePage from '../pages/ProfilePage/ProfilePage';
+import Dashboard from '../pages/Dashboard/Dashboard';
 
 const useRouteCustom = () => {
   const route = useRoutes([
-    { path: '/', element: <HomeTemplate /> },
+    {
+      path: '/',
+      element: <HomeTemplate />,
+      children: [
+        {
+          index: true,
+          element: <Dashboard />,
+        },
+        {
+          path: path.taskManager,
+          element: <TaskManager />,
+        },
+        {
+          path: path.profile,
+          element: <ProfilePage />,
+        },
+      ],
+    },
+
     { path: path.login, element: <LoginPage /> },
     { path: path.signup, element: <SignUpPage /> },
     // {

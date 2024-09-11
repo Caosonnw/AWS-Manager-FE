@@ -1,0 +1,79 @@
+:where(.css-dev-only-do-not-override-qnu6hi).ant-layout .ant-layout-sider {
+  background: #232f3e !important;
+}
+:where(.css-dev-only-do-not-override-qnu6hi).ant-layout
+  .ant-layout-sider-trigger {
+  background: #ff9900 !important;
+}
+:where(.css-dev-only-do-not-override-qnu6hi).ant-menu-dark
+  .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-qnu6hi).ant-menu-dark
+  > .ant-menu
+  .ant-menu-item-selected {
+  background-color: #ff9900 !important;
+}
+:where(.css-dev-only-do-not-override-qnu6hi).ant-menu-dark,
+:where(.css-dev-only-do-not-override-qnu6hi).ant-menu-dark > .ant-menu {
+  background-color: #232f3e !important;
+}
+:where(.css-dev-only-do-not-override-qnu6hi).ant-menu-dark:not(
+    .ant-menu-horizontal
+  )
+  .ant-menu-item:not(.ant-menu-item-selected):hover,
+:where(.css-dev-only-do-not-override-qnu6hi).ant-menu-dark
+  > .ant-menu:not(.ant-menu-horizontal)
+  .ant-menu-item:not(.ant-menu-item-selected):hover {
+  background-color: #ff9900 !important;
+  transition: all 0.7s ease-in-out;
+}
+:where(.css-dev-only-do-not-override-qnu6hi).ant-input-outlined:hover {
+  border-color: #ff9900 !important;
+  background-color: #ffffff;
+}
+:where(.css-dev-only-do-not-override-qnu6hi).ant-input-outlined:focus,
+:where(.css-dev-only-do-not-override-qnu6hi).ant-input-outlined:focus-within {
+  border: #ff9900 !important;
+  box-shadow: 0 0 0 2px #ff9900 !important;
+}
+
+.demo-logo-verticals {
+  display: flex;
+  justify-content: center;
+  height: 32px;
+  margin: 16px;
+  border-radius: 6px;
+  i {
+    font-size: 50px;
+    color: #ff9900 !important;
+  }
+  a:hover {
+    color: #ec7211 !important;
+  }
+}
+
+.ant-badge {
+  margin-right: 10px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(133, 135, 165, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.bell-icon {
+  font-size: 17px;
+  color: black;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for bell icon */
+.bell-icon:hover {
+  transform: scale(1.2); /* Slightly enlarge the icon */
+  color: #ff9900; /* Change the color on hover */
+}
