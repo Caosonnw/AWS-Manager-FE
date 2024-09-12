@@ -4,6 +4,7 @@ import { Button, Row, Col, Card } from 'antd';
 import ReactApexChart from 'react-apexcharts';
 import PersonalSchedule from '../../components/PersonalSchedule/PersonalSchedule';
 import BirthdayCard from '../../components/BirthdayCard/BirthdayCard';
+import TimekeepingSchedule from '../../components/TimekeepingSchedule/TimekeepingSchedule';
 
 const Dashboard = () => {
   // Data for the work progress chart (middle)
@@ -46,7 +47,7 @@ const Dashboard = () => {
           {/* Row 1 */}
           <Row gutter={[16, 16]}>
             <Col span={12}>
-              <Button className="w-full h-full text-black flex items-center justify-center p-3 rounded-[6px] shadow text-[15px]">
+              <Button className="w-full h-full text-black flex items-center justify-start p-3 rounded-[6px] shadow text-[15px]">
                 <span className="bg-yellow-500 rounded-[4px]">
                   <i className="fa-solid fa-fingerprint p-[5px] text-white"></i>
                 </span>
@@ -54,7 +55,7 @@ const Dashboard = () => {
               </Button>
             </Col>
             <Col span={12}>
-              <Button className="w-full h-full text-black flex items-center justify-center p-3 rounded-[6px] shadow text-[15px]">
+              <Button className="w-full h-full text-black flex items-center justify-start p-3 rounded-[6px] shadow text-[15px]">
                 <span className="bg-purple-500 rounded-[4px]">
                   <i className="fa-solid fa-calendar-days p-[5px] text-white"></i>
                 </span>
@@ -62,7 +63,7 @@ const Dashboard = () => {
               </Button>
             </Col>
             <Col span={12}>
-              <Button className="w-full h-full text-black flex items-center justify-center p-3 rounded-[6px] shadow text-[15px]">
+              <Button className="w-full h-full text-black flex items-center justify-start p-3 rounded-[6px] shadow text-[15px]">
                 <span className="bg-red-500 rounded-[4px]">
                   <i className="fa-solid fa-clock p-[5px] text-white"></i>
                 </span>
@@ -70,7 +71,7 @@ const Dashboard = () => {
               </Button>
             </Col>
             <Col span={12}>
-              <Button className="w-full h-full text-black flex items-center justify-center p-3 rounded-[6px] shadow text-[15px]">
+              <Button className="w-full h-full text-black flex items-center justify-start p-3 rounded-[6px] shadow text-[15px]">
                 <span className="bg-green-500 rounded-[4px]">
                   <i className="fa-solid fa-suitcase-rolling p-[5px] text-white"></i>
                 </span>
@@ -79,30 +80,30 @@ const Dashboard = () => {
             </Col>
           </Row>
         </div>
-        <div className="w-full border-2 border-gray-200 p-2 px-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
+        <div className="w-full border-2 border-gray-100 p-2 px-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
           <div className="grid grid-cols-6 gap-4 w-full">
             <button className="flex flex-col items-center justify-center p-3 px-8 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
-              <i className="fa-regular fa-calendar-check text-[40px] mb-2 text-blue-500"></i>
+              <i className="fa-regular fa-calendar-check text-[40px] mb-2 text-[#ff9900]"></i>
               <span className="font-bold">Công</span>
             </button>
             <button className="flex flex-col items-center justify-center p-3 px-6 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
-              <i className="fa-solid fa-id-card text-[40px] mb-2 text-blue-500"></i>
+              <i className="fa-solid fa-id-card text-[40px] mb-2 text-[#ff9900]"></i>
               <span className="font-bold">Hồ sơ cá nhân</span>
             </button>
             <button className="flex flex-col items-center justify-center p-3 px-6 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
-              <i className="fa-solid fa-fingerprint text-[40px] mb-2 text-blue-500"></i>
+              <i className="fa-solid fa-fingerprint text-[40px] mb-2 text-[#ff9900]"></i>
               <span className="font-bold">DS quên chấm công</span>
             </button>
             <button className="flex flex-col items-center justify-center p-3 px-6 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
-              <i className="fa-solid fa-calendar-xmark text-[40px] mb-2 text-blue-500"></i>
+              <i className="fa-solid fa-calendar-xmark text-[40px] mb-2 text-[#ff9900]"></i>
               <span className="font-bold">DS ngày nghỉ</span>
             </button>
             <button className="flex flex-col items-center justify-center p-3 px-6 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
-              <i className="fa-solid fa-clock-rotate-left text-[40px] mb-2 text-blue-500"></i>
+              <i className="fa-solid fa-clock-rotate-left text-[40px] mb-2 text-[#ff9900]"></i>
               <span className="font-bold">DS tăng ca</span>
             </button>
             <button className="flex flex-col items-center justify-center p-3 px-6 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
-              <i className="fa-solid fa-ellipsis-h text-[40px] mb-2 text-blue-500"></i>
+              <i className="fa-solid fa-ellipsis-h text-[40px] mb-2 text-[#ff9900]"></i>
               <span className="font-bold">Xem thêm</span>
             </button>
           </div>
@@ -112,17 +113,25 @@ const Dashboard = () => {
       <div className="dashboard">
         <Row gutter={[16, 16]}>
           {/* Personal Schedule */}
-          <PersonalSchedule />
+
+          <Col span={7}>
+            <Card
+              title="Personal Calendar"
+              className="personal-schedule max-h-[520px] overflow-y-auto"
+            >
+              <PersonalSchedule />
+            </Card>
+          </Col>
 
           {/* Work Progress Chart */}
-          <Col span={9}>
+          <Col span={10}>
             <Card title="Work Progress" className="dashboard-card">
               <div className="flex justify-between">
                 <span className="flex flex-col font-bold text-[30px]">
                   50
                   <p className="text-[15px]">Tổng công việc</p>
                 </span>
-                <span className="flex flex-col items-end font-bold text-[30px] text-blue-500">
+                <span className="flex flex-col items-end font-bold text-[30px] text-[#FF9900]">
                   42
                   <p className="text-[15px] text-black">Hoàn thành</p>
                 </span>
@@ -137,7 +146,7 @@ const Dashboard = () => {
           </Col>
 
           {/* HR Status with smaller size */}
-          <Col span={8}>
+          <Col span={7}>
             <Card title="Human Resources Situation" className="dashboard-card">
               <ReactApexChart
                 options={hrStatusOptions}

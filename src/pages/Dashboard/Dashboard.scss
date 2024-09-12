@@ -8,3 +8,91 @@
   background-color: #1890ff;
   color: white;
 }
+
+.personal-schedule {
+  background-color: #ffffff;
+  border-radius: 8px;
+  max-width: 400px;
+  padding-bottom: 16px;
+
+  .date-selector {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  .date-button {
+    width: 75px;
+    height: 95px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+
+    .month-label {
+      font-size: 14px;
+      color: #7d7d7d;
+    }
+
+    .day-label {
+      font-size: 30px;
+      font-weight: bold;
+      color: #000000;
+    }
+
+    &:hover {
+      background-color: #ffd699;
+    }
+  }
+
+  .selected {
+    background-color: #ff9900;
+    color: #ffffff;
+
+    .month-label,
+    .day-label {
+      color: #ffffff;
+    }
+  }
+
+  .schedule-details {
+    margin-top: 20px;
+    padding-left: 10px;
+
+    .schedule-item {
+      margin-bottom: 20px;
+      padding: 14px;
+      border-left: 4px solid #ff9900;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+
+      .schedule-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .schedule-sub {
+        font-size: 16px;
+        color: #7d7d7d;
+        margin-bottom: 4px;
+      }
+
+      .schedule-time {
+        font-size: 16px;
+        color: #555555;
+      }
+
+      .schedule-date {
+        font-size: 12px;
+        color: #ffffff;
+        background-color: #f79e1b;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+    }
+  }
+}

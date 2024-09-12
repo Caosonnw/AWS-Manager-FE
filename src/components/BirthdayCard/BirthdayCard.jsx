@@ -16,7 +16,10 @@ const BirthdayCard = () => {
             <p className="font-bold">Hoàng Vũ</p>
           </div>
           <div>
-            <Button type="primary" icon={<i className="fa-solid fa-gift"></i>}>
+            <Button
+              className="bg-[#FF9900] text-white"
+              icon={<i className="fa-solid fa-gift"></i>}
+            >
               Gửi lời chúc
             </Button>
           </div>
