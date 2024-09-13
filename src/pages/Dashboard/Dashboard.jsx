@@ -4,7 +4,6 @@ import { Button, Row, Col, Card } from 'antd';
 import ReactApexChart from 'react-apexcharts';
 import PersonalSchedule from '../../components/PersonalSchedule/PersonalSchedule';
 import BirthdayCard from '../../components/BirthdayCard/BirthdayCard';
-import TimekeepingSchedule from '../../components/TimekeepingSchedule/TimekeepingSchedule';
 
 const Dashboard = () => {
   // Data for the work progress chart (middle)
