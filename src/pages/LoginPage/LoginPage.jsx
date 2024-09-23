@@ -1,10 +1,61 @@
-import React from 'react';
-import { path } from '../../common/path';
+import { useFormik } from 'formik';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { path } from '../../common/path';
+import { handleGetValueUser } from '../../redux/Slice/userSlice';
+import { authServ } from '../../services/authServ';
+import { useAlert } from '../../utils/AlertContext/AlertContext';
+import { saveLocalStorage } from '../../utils/localStorage';
+import LoadingAnimation from '../../components/Animations/LoadingAnimation';
+import {
+  handleTurnOffLoading,
+  handleTurnOnLoading,
+} from '../../redux/Slice/loadingSlice';
+import { useSelector } from 'react-redux';
 
 const LoginPage = () => {
+  const isLoading = useSelector((state) => state.loadingSlice.isLoading);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const showAlert = useAlert();
+
+  useEffect(() => {
+    dispatch(handleTurnOnLoading());
+    setTimeout(() => {
+      dispatch(handleTurnOffLoading());
+    }, 3525);
+  }, []);
+  const { handleBlur, handleChange, handleSubmit, values, errors, touched } =
+    useFormik({
+      initialValues: {
+        email: '',
+        password: '',
+      },
+      onSubmit: async (values) => {
+        // console.log(values);
+        try {
+          const res = await authServ.login(values);
+          showAlert(res.data.message, 'success');
+          navigate(path.home);
+          saveLocalStorage('LOGIN_USER', res.data.data);
+          dispatch(handleGetValueUser(res.data.data));
+        } catch (err) {
+          showAlert(err.response?.data?.message || 'Login failed', 'error');
+        }
+      },
+      validationSchema: Yup.object({
+        email: Yup.string()
+          .required('This field is required')
+          .email('Please enter the correct email format'),
+        password: Yup.string().required('This field is required'),
+      }),
+    });
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
+      {isLoading && <LoadingAnimation />}
       <Helmet>
         <title>AWS Manager | Login</title>
       </Helmet>
@@ -28,7 +79,7 @@ const LoginPage = () => {
         </div>
 
         {/* Sign In Form */}
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
               <label
@@ -40,10 +91,15 @@ const LoginPage = () => {
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 id="email"
-                type="email"
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
                 placeholder="you@example.com"
-                required
               />
+              {touched.email && errors.email && (
+                <p className="text-red-500 text-[12px] mt-1">{errors.email}</p>
+              )}
             </div>
             <div>
               <label
@@ -56,9 +112,18 @@ const LoginPage = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[FF9900] focus:border-[FF9900]"
                 id="password"
                 type="password"
+                name="password"
+                autoComplete="username"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
                 placeholder="••••••••"
-                required
               />
+              {touched.password && errors.password && (
+                <p className="text-red-500 text-[12px] mt-1">
+                  {errors.password}
+                </p>
+              )}
             </div>
             {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between">
