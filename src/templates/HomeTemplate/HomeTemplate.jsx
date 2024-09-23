@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
   Avatar,
   Badge,
@@ -10,11 +11,17 @@ import {
 } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
-import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { path } from '../../common/path';
 import { useDispatch, useSelector } from 'react-redux';
 import './HomeTemplate.scss';
+import { getLocalStorage } from '../../utils/localStorage';
+import { jwtDecode } from 'jwt-decode';
+import { employeeServ } from '../../services/employeeServ';
+import {
+  handleTurnOffLoading,
+  handleTurnOnLoading,
+} from '../../redux/Slice/loadingSlice';
 
 const userMenu = {
   items: [
@@ -40,14 +47,14 @@ const userMenu = {
     },
   ],
 };
-// CRM là Quản lý quan hệ khách hàng hay CRM là một phương pháp giúp các doanh nghiệp tiếp cận và giao tiếp với khách hàng một cách có hệ thống và hiệu quả, quản lý các thông tin của khách hàng như thông tin về tài khoản, nhu cầu, liên lạc và các vấn đề khác nhằm phục vụ khách hàng tốt hơn.
+
 const arrMenu = [
   {
     key: 'dashBoard',
     type: 'group',
     children: [
       {
-        key: 'dashboard',
+        key: '/dashboard',
         label: <Link to={path.home}>Dashboard</Link>,
         icon: <i className="fa-solid fa-house"></i>,
       },
@@ -59,7 +66,7 @@ const arrMenu = [
     label: 'Task Manager',
     children: [
       {
-        key: 'taskManager',
+        key: '/task-manager',
         label: <Link to={path.taskManager}>Task Manager</Link>,
         icon: <i className="fa-solid fa-tasks"></i>,
       },
@@ -68,12 +75,44 @@ const arrMenu = [
 ];
 
 const HomeTemplate = () => {
+  const isLoading = useSelector((state) => state.loadingSlice.isLoading);
+  const [userLogin, setUserLogin] = useState();
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(handleTurnOnLoading());
+  //   const user = getLocalStorage('LOGIN_USER');
+  //   if (user) {
+  //     const token = jwtDecode(user);
+  //     employeeServ.getEmployeeById(token.employee_id).then((res) => {
+  //       const { role } = res.data.data;
+  //       if (role !== 'ADMIN') {
+  //         window.location.href = path.home;
+  //       }
+  //       dispatch(handleTurnOffLoading());
+  //     });
+  //   } else {
+  //     window.location.href = '*';
+  //   }
+  // }, []);
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  const isLoading = useSelector((state) => state.loadingSlice.isLoading);
-  const dispatch = useDispatch();
+
+  const selectedKey =
+    location.pathname === '/' ? '/dashboard' : location.pathname;
+
+  useEffect(() => {
+    employeeServ
+      .getEmployeeById(1)
+      .then((res) => {
+        setUserLogin(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <Layout style={{ minHeight: '100vh', display: 'flex' }}>
@@ -93,7 +132,13 @@ const HomeTemplate = () => {
             <i className="fa-brands fa-aws"></i>
           </Link>
         </div>
-        <Menu theme="dark" mode="inline" items={arrMenu} />
+        <Menu
+          theme="dark"
+          mode="inline"
+          items={arrMenu}
+          defaultSelectedKeys={['/dashboard']}
+          selectedKeys={[selectedKey]}
+        />
       </Sider>
 
       {/* Main Layout */}
@@ -159,7 +204,7 @@ const HomeTemplate = () => {
                 <Avatar
                   size={36}
                   shape="square"
-                  src="https://randomuser.me/api/portraits/men/25.jpg"
+                  src={`http://localhost:8080/public/img/${userLogin?.avatar}`}
                   style={{ borderRadius: '10px' }}
                 />
 
