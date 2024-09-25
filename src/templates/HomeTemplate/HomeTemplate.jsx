@@ -23,6 +23,19 @@ import {
   handleTurnOnLoading,
 } from '../../redux/Slice/loadingSlice';
 
+const Logout = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // dispatch(handleTurnOnLoading());
+    setTimeout(() => {
+      // dispatch(handleTurnOffLoading());
+      localStorage.removeItem('LOGIN_USER');
+      window.location.href = path.homepage;
+    }, 1000);
+  }, []);
+  return <div></div>;
+};
+
 const userMenu = {
   items: [
     {

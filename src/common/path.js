@@ -7,4 +7,5 @@ export const path = {
   logout: '/logout',
   taskManager: '/task-manager',
   test: '/test',
+  timekeeping: '/timekeeping',
 };
