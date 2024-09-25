@@ -1,7 +1,17 @@
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL;
+const IMAGE_URL = import.meta.env.VITE_IMAGE_URL;
+
+console.log(import.meta.env.VITE_API_URL);
+
+export const httpImage = axios.create({
+  baseURL: IMAGE_URL,
+  timeout: 30000,
+});
+
 export const http = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: API_URL,
   timeout: 30000,
 });
 http.interceptors.request.use((config) => {

@@ -18,3 +18,9 @@ body {
   font-style: normal;
   font-variation-settings: 'wdth' 100;
 }
+
+:where(.css-dev-only-do-not-override-qnu6hi).ant-progress
+  .ant-progress-success-bg,
+:where(.css-dev-only-do-not-override-qnu6hi).ant-progress .ant-progress-bg {
+  background: #ff9900;
+}
