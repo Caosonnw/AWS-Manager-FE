@@ -6,6 +6,7 @@ import HomeTemplate from '../templates/HomeTemplate/HomeTemplate';
 import TaskManager from '../pages/TaskManager/TaskManager';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import Dashboard from '../pages/Dashboard/Dashboard';
+import TimeKeeping from '../pages/TimeKeeping/TimeKeeping';
 
 const useRouteCustom = () => {
   const route = useRoutes([
@@ -24,6 +25,10 @@ const useRouteCustom = () => {
         {
           path: path.profile,
           element: <ProfilePage />,
+        },
+        {
+          path: path.timekeeping,
+          element: <TimeKeeping />,
         },
       ],
     },

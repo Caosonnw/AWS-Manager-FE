@@ -4,8 +4,12 @@ import { Button, Row, Col, Card } from 'antd';
 import ReactApexChart from 'react-apexcharts';
 import PersonalSchedule from '../../components/PersonalSchedule/PersonalSchedule';
 import BirthdayCard from '../../components/BirthdayCard/BirthdayCard';
+import { Link, useNavigate } from 'react-router-dom';
+import { path } from '../../common/path';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
   // Data for the work progress chart (middle)
   const workProgressOptions = {
     chart: {
@@ -46,7 +50,10 @@ const Dashboard = () => {
           {/* Row 1 */}
           <Row gutter={[16, 16]}>
             <Col span={12}>
-              <Button className="w-full h-full text-black flex items-center justify-start p-3 rounded-[6px] shadow text-[15px]">
+              <Button
+                className="w-full h-full text-black flex items-center justify-start p-3 rounded-[6px] shadow text-[15px]"
+                onClick={navigate(path.timekeeping)}
+              >
                 <span className="bg-yellow-500 rounded-[4px]">
                   <i className="fa-solid fa-fingerprint p-[5px] text-white"></i>
                 </span>
