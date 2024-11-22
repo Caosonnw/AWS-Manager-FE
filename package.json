@@ -1,5 +1,5 @@
 {
-  "name": "aws-management-fe",
+  "name": "aws-manager-fe",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -21,6 +21,7 @@
     "jwt-decode": "^4.0.0",
     "lottie-react": "^2.4.0",
     "moment": "^2.30.1",
+    "quill": "2.0.2",
     "react": "^18.3.1",
     "react-apexcharts": "^1.4.1",
     "react-beautiful-dnd": "^13.1.1",

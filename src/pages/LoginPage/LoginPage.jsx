@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +18,7 @@ import { useSelector } from 'react-redux';
 
 const LoginPage = () => {
   const isLoading = useSelector((state) => state.loadingSlice.isLoading);
+  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const showAlert = useAlert();
@@ -53,6 +54,16 @@ const LoginPage = () => {
         password: Yup.string().required('This field is required'),
       }),
     });
+
+  useEffect(() => {
+    const token = localStorage.getItem('LOGIN_USER');
+    if (token) {
+      setIsLogin(true);
+    }
+    if (isLogin === true) {
+      navigate(path.home);
+    }
+  }, [isLogin]);
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
       {isLoading && <LoadingAnimation />}

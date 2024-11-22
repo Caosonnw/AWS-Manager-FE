@@ -22,19 +22,7 @@ import {
   handleTurnOffLoading,
   handleTurnOnLoading,
 } from '../../redux/Slice/loadingSlice';
-
-const Logout = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    // dispatch(handleTurnOnLoading());
-    setTimeout(() => {
-      // dispatch(handleTurnOffLoading());
-      localStorage.removeItem('LOGIN_USER');
-      window.location.href = path.homepage;
-    }, 1000);
-  }, []);
-  return <div></div>;
-};
+import LoadingAnimation from '../../components/Animations/LoadingAnimation';
 
 const userMenu = {
   items: [
@@ -85,28 +73,68 @@ const arrMenu = [
       },
     ],
   },
+  {
+    key: 'chatPage',
+    type: 'group',
+    label: 'Chat',
+    children: [
+      {
+        key: '/chat',
+        label: <Link to={path.chat}>Chat</Link>,
+        icon: <i className="fa-solid fa-message"></i>,
+      },
+    ],
+  },
+  {
+    key: 'userManagement',
+    type: 'group',
+    label: 'User Management',
+    children: [
+      {
+        key: '/user-management',
+        label: <Link to={path.userManagement}>User Management</Link>,
+        icon: <i className="fa-solid fa-users"></i>,
+      },
+    ],
+  },
+  {
+    key: 'socialNetwork',
+    type: 'group',
+    label: 'Social Network',
+    children: [
+      {
+        key: '/social-network',
+        label: <Link to={path.socialNetwork}>Social Network</Link>,
+        icon: <i className="fa-solid fa-icons"></i>,
+      },
+    ],
+  },
 ];
 
 const HomeTemplate = () => {
   const isLoading = useSelector((state) => state.loadingSlice.isLoading);
   const [userLogin, setUserLogin] = useState();
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(handleTurnOnLoading());
-  //   const user = getLocalStorage('LOGIN_USER');
-  //   if (user) {
-  //     const token = jwtDecode(user);
-  //     employeeServ.getEmployeeById(token.employee_id).then((res) => {
-  //       const { role } = res.data.data;
-  //       if (role !== 'ADMIN') {
-  //         window.location.href = path.home;
-  //       }
-  //       dispatch(handleTurnOffLoading());
-  //     });
-  //   } else {
-  //     window.location.href = '*';
-  //   }
-  // }, []);
+
+  useEffect(() => {
+    if (!userLogin) {
+      dispatch(handleTurnOnLoading());
+      const user = getLocalStorage('LOGIN_USER');
+      if (user) {
+        const token = jwtDecode(user);
+        employeeServ.getEmployeeById(token.employee_id).then((res) => {
+          const { role } = res.data.data;
+          if (role !== '' && window.location.pathname !== path.home) {
+            window.location.href = path.home;
+          }
+          setUserLogin(res.data.data);
+          dispatch(handleTurnOffLoading());
+        });
+      } else {
+        window.location.href = '*';
+      }
+    }
+  }, [userLogin, dispatch]);
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
   const {
@@ -126,9 +154,15 @@ const HomeTemplate = () => {
         console.log(err);
       });
   }, []);
-
+  useEffect(() => {
+    dispatch(handleTurnOnLoading());
+    setTimeout(() => {
+      dispatch(handleTurnOffLoading());
+    }, 3525);
+  }, []);
   return (
     <Layout style={{ minHeight: '100vh', display: 'flex' }}>
+      {/* {isLoading && <LoadingAnimation />} */}
       {/* Sider */}
       <Sider
         collapsible

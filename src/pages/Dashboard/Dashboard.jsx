@@ -43,6 +43,10 @@ const Dashboard = () => {
   };
 
   const hrStatusSeries = [210, 16, 24, 4];
+
+  const handleClickNavigate = () => {
+    navigate(path.timekeeping);
+  };
   return (
     <>
       <div className="flex gap-20 items-center mb-10">
@@ -52,7 +56,7 @@ const Dashboard = () => {
             <Col span={12}>
               <Button
                 className="w-full h-full text-black flex items-center justify-start p-3 rounded-[6px] shadow text-[15px]"
-                onClick={navigate(path.timekeeping)}
+                onClick={handleClickNavigate}
               >
                 <span className="bg-yellow-500 rounded-[4px]">
                   <i className="fa-solid fa-fingerprint p-[5px] text-white"></i>

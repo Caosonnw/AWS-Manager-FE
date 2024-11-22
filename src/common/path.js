@@ -8,4 +8,9 @@ export const path = {
   taskManager: '/task-manager',
   test: '/test',
   timekeeping: '/timekeeping',
+  chat: '/chat',
+  logout: '/logout',
+  project: '/project/:projectId',
+  userManagement: '/user-management',
+  socialNetwork: '/social-network',
 };
