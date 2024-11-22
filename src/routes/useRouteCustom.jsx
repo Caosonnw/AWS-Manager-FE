@@ -7,6 +7,12 @@ import TaskManager from '../pages/TaskManager/TaskManager';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import TimeKeeping from '../pages/TimeKeeping/TimeKeeping';
+import ListManager from '../layout/ListManager/ListManager';
+import ChatPage from '../pages/ChatPage/ChatPage';
+import Logout from '../pages/LogoutPage/Logout';
+import NotFoundAnimation from '../components/Animations/NotFoundAnimation';
+import UserManagement from '../pages/UserManagement/UserManagement';
+import SocialNetwork from '../pages/SocialNetwork/SocialNetwork';
 
 const useRouteCustom = () => {
   const route = useRoutes([
@@ -20,7 +26,7 @@ const useRouteCustom = () => {
         },
         {
           path: path.taskManager,
-          element: <TaskManager />,
+          element: <ListManager />,
         },
         {
           path: path.profile,
@@ -30,15 +36,35 @@ const useRouteCustom = () => {
           path: path.timekeeping,
           element: <TimeKeeping />,
         },
+        {
+          path: path.chat,
+          element: <ChatPage />,
+        },
+        {
+          path: path.logout,
+          element: <Logout />,
+        },
+        {
+          path: path.project,
+          element: <TaskManager />,
+        },
+        {
+          path: path.userManagement,
+          element: <UserManagement />,
+        },
+        {
+          path: path.socialNetwork,
+          element: <SocialNetwork />,
+        },
       ],
     },
 
     { path: path.login, element: <LoginPage /> },
     { path: path.signup, element: <SignUpPage /> },
-    // {
-    //   path: '*',
-    //   element: <NotFound />,
-    // },
+    {
+      path: '*',
+      element: <NotFoundAnimation />,
+    },
   ]);
   return route;
 };

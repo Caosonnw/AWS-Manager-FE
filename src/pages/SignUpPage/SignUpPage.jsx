@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { path } from '../../common/path';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,9 +7,12 @@ import {
   handleTurnOffLoading,
   handleTurnOnLoading,
 } from '../../redux/Slice/loadingSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const isLoading = useSelector((state) => state.loadingSlice.isLoading);
+  const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,6 +21,16 @@ const SignUpPage = () => {
       dispatch(handleTurnOffLoading());
     }, 3525);
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('LOGIN_USER');
+    if (token) {
+      setIsLogin(true);
+    }
+    if (isLogin === true) {
+      navigate(path.home);
+    }
+  }, [isLogin]);
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
       {isLoading && <LoadingAnimation />}

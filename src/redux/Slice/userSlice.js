@@ -12,9 +12,12 @@ const userSlice = createSlice({
     handleGetValueUser: (state, action) => {
       state.user = action.payload;
     },
+    handleClearDataUser: (state) => {
+      state.user = null;
+    },
   },
 });
 
-export const { handleGetValueUser } = userSlice.actions;
+export const { handleGetValueUser, handleClearDataUser } = userSlice.actions;
 
 export default userSlice.reducer;

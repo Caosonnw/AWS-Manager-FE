@@ -1,0 +1,50 @@
+.chat {
+  .ant-layout-sider {
+    background-color: #ffff !important;
+  }
+  .ant-tabs-tab-btn {
+    color: #ff9900 !important;
+  }
+  .ant-tabs-ink-bar {
+    background: #ff9900 !important;
+  }
+  .ant-tabs-tab:hover {
+    color: #ec7211 !important;
+  }
+
+  .chat-sidebar {
+    background-color: #f0f2f5;
+
+    .chat-tabs {
+      .ant-tabs-nav {
+        margin-bottom: 10px;
+      }
+      .chat-item {
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #ff99008b;
+        }
+
+        .ant-list-item-meta-title {
+          font-size: 16px;
+          color: #333;
+        }
+
+        .ant-list-item-meta-description {
+          font-size: 14px;
+          color: #888;
+        }
+      }
+    }
+  }
+
+  .chat-messages {
+    max-height: 70vh;
+    overflow-y: auto;
+    background-color: #fafafa;
+  }
+}
